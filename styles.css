@@ -1,16 +1,16 @@
 :root {
     /* Color Palette */
-    --color-background: #FAF0E6;       /* Creamy Ivory */
-    --color-project-card: #FFF;        /* Pure Snow */
+    --color-background: #000000;       /* Dark Slate Gray */
+    --color-project-card: #000000;        /* Pure Snow */
     --color-project-links: #F8F6F6;    /* Soft Pearl */
-    --color-social-links: #F8F6F6;     /* Soft Pearl */
-    --color-text: #2F4F4F;             /* Deep Charcoal */
-    --color-accent: #2F4F4F;           /* Deep Charcoal */
+    --color-social-links: #FFFFFF;     /* White */
+    --color-accent: #FFFFFF;           /* White */
     --color-badge: #FF4D4D;            /* Crimson Blaze */
-    
+
     /* Transition Duration */
     --transition-duration: 0.3s;
 }
+
 /* Reset & Base Styles */
 * {
     margin: 0;
@@ -19,12 +19,12 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
     line-height: 1.6;
-    color: var(--color-text);
     background-color: var(--color-background);
 }
 
+/* Container */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -34,25 +34,26 @@ body {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-    color: var(--color-text);
+    color: inherit; /* Inherits from parent or default */
     margin-bottom: 10px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
 }
 
 /* Paragraphs */
 p {
-    color: var(--color-text);
+    color: inherit; /* Inherits from parent or default */
     line-height: 1.6;
 }
 
 /* Main Container */
 .main-container {
-    display: flex; /* or flex or center? */
+    display: center;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center; /* flex-start or center? */
-    height: 100vh; /* Full viewport height */
+    align-items: center;
+    height: 100vh;
     padding: 20px;
+    background-color: var(--color-background);
 }
 
 /* Left Column */
@@ -76,38 +77,76 @@ p {
     padding: 20px;
 }
 
-/* Primary Button Styling */
+/* =========================================
+   Buttons: No background
+   ========================================= */
 .btn-primary {
-    background-color: var(--color-accent);
-    color: #fff;
+    background-color: transparent;  /* No background */
+    color: #fff;                    /* Keep text white (adjust as needed) */
     padding: 10px 20px;
-    border: none;
+    border: 1px solid #fff;         /* Optional: Add a subtle border */
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color var(--transition-duration) ease, transform var(--transition-duration) ease;
+    transition: color var(--transition-duration) ease,
+                transform var(--transition-duration) ease;
 }
 
 .btn-primary:hover {
-    background-color: darken(var(--color-accent), 10%); /* Darken the accent color on hover */
+    background-color: transparent;  /* Remain transparent on hover */
+    color: #fff;                    /* Keep text white */
     transform: scale(1.05);
 }
 
-/* Link Styling */
+/* =========================================
+   Logo Styling
+   ========================================= */
+
+/* Logo Styling */
+.logo {
+    width: 100%;
+    max-width: 600px;        /* Adjust the maximum width as needed */
+    height: auto;            /* Maintains aspect ratio */
+    object-fit: contain;     /* Ensures the logo fits within the container without distortion */
+    margin-bottom: 20px;     /* Adds space below the logo */
+    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+}
+
+.logo:hover {
+    /* transform: scale(1.05);  Slightly enlarges the logo on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow on hover */
+}
+
+/* =========================================
+   Global Link Styling
+   ========================================= */
 a {
-    color: var(--color-accent);
+    /* Default all links to white */
+    color: #FFFFFF;
     text-decoration: none;
     transition: color var(--transition-duration) ease;
 }
 
+/* Text links get underlined on hover, 
+   but we'll remove it from icon links. */
 a:hover {
-    color: #A0522D; /* Sienna - a darker shade of brown */
+    /* No underline by default on hover */
+    text-decoration: none;
 }
 
+/* Underline ONLY text-based links on hover 
+   (exclude icon links via :not(.icon-link)) */
+a:not(.icon-link):hover {
+    text-decoration: underline;
+}
+
+/* .underline-link class (if needed) */
 .underline-link {
     text-decoration: underline;
 }
 
-/* Profile Picture Styling */
+/* =========================================
+   Profile Picture Styling
+   ========================================= */
 .profile-pic {
     width: 200px;
     height: 200px;
@@ -115,32 +154,35 @@ a:hover {
     border-radius: 50%;
     margin-bottom: 20px;
     border: 4px solid #fff;
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease; /* Smooth transitions */
-    transform: scale(1.05); /* Apply current hover scale as default */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Apply current hover shadow as default */
+    transition: transform var(--transition-duration) ease, 
+                box-shadow var(--transition-duration) ease;
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .profile-pic:hover {
-    transform: scale(1.1); /* Increase scale on hover */
-    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+    transform: scale(1.1);
+    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* Center-align paragraphs within the left column */
-.left-column p {
-    text-align: center;
-}
-
-/* User Name */
+/* Specific Text Coloring for Name & Description */
 .user-name {
     margin-top: 10px;
-    font-size: 1.8rem; /* Adjust size as needed */
+    font-size: 1.8rem;
     font-weight: 1000; /* Bold text */
-    color: var(--color-text);
+    color: #FFFFFF;    /* White */
     text-align: center;
-    font-family: 'Roboto', sans-serif; /* Ensures consistency with the rest of the site */
+    font-family: 'Roboto Mono', sans-serif;
 }
 
-/* Social Links */
+.left-column p {
+    text-align: center;
+    color: #FFFFFF;    /* White */
+}
+
+/* =========================================
+   Social Links (icons remain white)
+   ========================================= */
 .social-links {
     display: flex;
     gap: 5px;
@@ -149,80 +191,99 @@ a:hover {
     justify-content: center; /* Center the social links horizontally */
 }
 
-/* Icon-Only Links */
+/* Icon-Only Links Base */
 .icon-link {
-    display: inline-flex;                 /* Allows proper alignment of icons */
-    align-items: center;                  /* Vertically centers the icon */
-    justify-content: center;              /* Horizontally centers the icon */
-    width: 50px;                           /* Fixed width for uniformity */
-    height: 50px;                          /* Fixed height for uniformity */
-    color: var(--color-accent);           /* Changed from #007BFF to accent color */
-    border-radius: 50%;                    /* Makes the link circular */
-    transition: background-color var(--transition-duration) ease, transform var(--transition-duration) ease; /* Smooth transitions */
-    text-decoration: none;                 /* Removes underline from links */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    /* Remove circular shape for project icons, 
+       but keep for social if you want a circle for them. 
+       So we won't define border-radius: 50% here. */
+    transition: background-color var(--transition-duration) ease,
+                transform var(--transition-duration) ease,
+                color var(--transition-duration) ease;
+    text-decoration: none; /* No underline on icon links */
 }
 
 .icon-link:hover {
-    color: var(--color-accent);                  /* Maintain accent color on hover */
-    transform: scale(1.1);                        /* Slightly enlarges the icon on hover */
+    transform: scale(1.1);
 }
 
+/* Social Icons: White */
+.social-links .icon-link {
+    color: #FFFFFF !important; /* Force white for social icons */
+    border-radius: 50%;        /* Keep circular shape for social icons */
+}
+
+.social-links .icon-link:hover {
+    background-color: transparent !important; /* No background change */
+    color: #FFFFFF !important; /* Remain white on hover */
+}
+
+/* Icon sizes */
 .icon-link i,
 .icon-link .nostr-logo {
-    font-size: 1.5rem;                     /* Adjust icon size as needed */
-    width: 24px;                            /* Fixed width for images */
-    height: 24px;                           /* Fixed height for images */
-    object-fit: contain;                    /* Ensures images fit within the container */
+    font-size: 1.5rem;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
 /* Nostr Logo within Icon Links */
 .icon-link .nostr-logo {
-    width: 30px;    /* Increased size for better visibility */
-    height: 30px;   /* Increased size for better visibility */
-    object-fit: cover; /* Ensures the logo fills the container without distortion */
-    border-radius: 50%; /* Makes the Nostr logo circular */
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease; /* Maintains hover effects */
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform var(--transition-duration) ease, 
+                box-shadow var(--transition-duration) ease;
 }
 
-/* QR Code */
+/* =========================================
+   QR Code
+   ========================================= */
 .qr-code {
     margin-top: 5px;
-    text-align: center; /* Centers the text horizontally */
-    padding: 20px; /* Optional: Adds space inside the container */
+    text-align: center;
+    padding: 20px;
 }
 
 .qr-code p {
-    font-size: 1rem; /* Adjust as needed */
-    color: var(--color-text); /* Text color */
-    margin-bottom: 10px; /* Space between text and image */
+    font-size: 1rem;
+    color: inherit; /* Inherits from parent */
+    margin-bottom: 10px;
 }
 
 .qr-image {
-    width: 100px; /* Adjust size as needed */
-    height: 100px; /* Adjust size as needed */
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     border: 2px solid #ccc;
     border-radius: 8px;
-    display: block; /* Makes the image a block element */
-    margin: 10px auto 0; /* Centers the image horizontally and adds top margin */
-    background-color: #fff; /* Optional: Adds a white background */
+    display: block;
+    margin: 10px auto 0;
+    background-color: #fff;
 }
 
-/* Projects Grid */
+/* =========================================
+   Projects Grid & Cards
+   ========================================= */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Reduced min-width */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    align-items: stretch; /* Ensures all grid items stretch to match the tallest item in the row */
+    align-items: stretch;
 }
 
-/* Project Card Wrapper */
+/* Wrapper for each project card */
 .project-card-wrapper {
-    position: relative; /* Establishes a positioning context for the badge */
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the project card horizontally */
-    height: 100%; /* Allows the wrapper to stretch and fill the grid row */
+    align-items: center;
+    height: 100%;
 }
 
 /* Hover Effect on Project Card Wrapper */
@@ -233,40 +294,50 @@ a:hover {
 
 .project-card-wrapper:hover .coming-soon-badge {
     transform: translateY(-15px) rotate(-10deg);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 77, 77, 0.7); /* More pronounced shadow and glow on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 77, 77, 0.7);
 }
 
 /* Project Card Transition */
 .project-card {
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+    transition: transform var(--transition-duration) ease, 
+                box-shadow var(--transition-duration) ease;
 }
 
 /* Coming Soon Badge Transition */
 .coming-soon-badge {
-    transition: transform var(--transition-duration) ease, opacity var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+    transition: transform var(--transition-duration) ease, 
+                opacity var(--transition-duration) ease, 
+                box-shadow var(--transition-duration) ease;
 }
 
 /* Project Card Styling */
 .project-card {
-    flex: 1; /* Allows the project card to grow and fill the wrapper */
+    flex: 1;
     background-color: var(--color-project-card);
     padding: 20px;
-    border-radius: 16px; /* Consistent border-radius */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Consistent box-shadow */
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease; /* Smooth transitions */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distributes space between elements */
-    gap: 0px; /* Consistent spacing between elements */
-    margin: 0; /* Removes margin to prevent extra spacing */
-    max-width: 1100px; /* Ensures uniform width */
-    width: 100%; /* Takes full available width up to max-width */
+    justify-content: space-between;
+    gap: 0px;
+    margin: 0;
+    max-width: 1100px;
+    width: 100%;
+    color: #FFFFFF; /* Base text color inside project card: black */
 }
 
+/* Ensure project card text retains black color */
+.project-card h3,
+.project-card p {
+    color: inherit;
+}
+
+/* Image Container */
 .image-container {
     width: 100%;
-    height: 200px; /* Fixed height for consistency */
+    height: 200px;
     overflow: hidden;
     margin-bottom: 0px;
     display: flex;
@@ -278,7 +349,7 @@ a:hover {
 .image-container img {
     width: 95%;
     height: 95%;
-    object-fit: contain; /* Ensures images scale uniformly */
+    object-fit: contain;
     transition: transform var(--transition-duration) ease;
 }
 
@@ -289,124 +360,183 @@ a:hover {
 .project-card h3 {
     margin: 15px 0 10px;
     font-size: 1.5rem;
-    color: var(--color-text);
+    color: inherit; /* Inherit black */
 }
 
 .project-card p {
-    flex-grow: 1; /* Allows the paragraph to expand and fill available space */
+    flex-grow: 1;
     font-size: 1rem;
     margin-bottom: 0px;
-    text-align: center; /* Centers the text */
+    text-align: center;
+    color: inherit; /* Inherit black */
 }
 
-/* Coming Soon Badge Styling */
+/* Project Card "Coming Soon" Badge */
 .coming-soon-badge {
     position: absolute;
-    top: 10px; /* Distance from the top of the wrapper */
-    left: -10px; /* Distance from the left of the wrapper */
+    top: 10px;
+    left: -10px;
     background-color: var(--color-badge);
-    color: #fff; /* White text for contrast */
-    padding: 12px 28px; /* Increased padding for wider appearance */
-    font-size: 1.1rem; /* Larger font size for visibility */
+    color: #fff; /* White text */
+    padding: 12px 28px;
+    font-size: 1.1rem;
     font-weight: bold;
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 77, 77, 0.5); /* Enhanced shadow with glow */
-    transform: rotate(-15deg); /* Fun tilt */
-    transition: transform var(--transition-duration) ease, opacity var(--transition-duration) ease, box-shadow var(--transition-duration) ease; /* Smooth transitions including shadow */
-    opacity: 0.95; /* Slight transparency */
-    z-index: 10; /* Ensures the badge appears above other elements */
-    white-space: nowrap; /* Prevents text wrapping */
-    max-width: 250px; /* Prevents excessive width */
-    text-overflow: ellipsis; /* Adds ellipsis if text overflows */
-    overflow: hidden; /* Hides overflowing text */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 77, 77, 0.5);
+    transform: rotate(-15deg);
+    opacity: 0.95;
+    z-index: 10;
+    white-space: nowrap;
+    max-width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-/* Enhance shadow on hover */
 .project-card-wrapper:hover .coming-soon-badge {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 77, 77, 0.7); /* More pronounced shadow and glow on hover */
-}
-
-/* Coming Soon Badge Hover */
-.project-card-wrapper:hover .coming-soon-badge {
-    transform: translateY(-15px) rotate(-10deg);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 77, 77, 0.7);
+    transform: translateY(-15px) rotate(-10deg);
     opacity: 1;
 }
 
-/* Tooltip Styling */
+/* =========================================
+   Tooltips
+   ========================================= */
+
+/* 
+   Remove transitions from tooltip to avoid 
+   any flickering or delay (text will appear 
+   immediately).
+*/
 .tooltip .tooltiptext {
+    display: none; 
     visibility: hidden;
-    width: 120px;
-    background-color: var(--color-text);
-    color: #fff;
-    text-align: center;
+
+    /* Let the tooltip width be dictated by the text */
+    width: fit-content; /* or use max-content */
+    white-space: nowrap; /* prevents text wrapping */
+
+    /* Add padding for extra space around the text */
+    padding: 8px 12px;
+
+    /* Remove or adjust any max-width/min-width if you had them */
+    min-width: 0; 
+    max-width: none;
+
     border-radius: 4px;
-    padding: 6px 0;
     position: absolute;
-    z-index: 1;
-    bottom: 100%; /* Position above the icon */
+    bottom: 100%; 
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
+    transition: none; /* to avoid flicker or delay */
+    z-index: 1; 
+}
+
+/* Show instantly on hover/focus */
+.tooltip:hover .tooltiptext,
+.tooltip:focus .tooltiptext {
+    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Tooltip Arrow */
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
-    top: 100%; /* At the bottom of the tooltip */
+    top: 100%;    /* At the bottom of the tooltip */
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
+    /* Dark arrow by default; can change dynamically if needed */
     border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
 }
 
-/* Show the tooltip on hover and focus */
+/* Show tooltip on hover/focus (instantly, no delay) */
 .tooltip:hover .tooltiptext,
 .tooltip:focus .tooltiptext {
+    display: block;
     visibility: visible;
     opacity: 1;
 }
 
-/* Project Links Container */
+/* Specific Tooltip Styling for SOCIAL icons 
+   (white bg, dark text, NO border) */
+.social-links .tooltip .tooltiptext {
+    background-color: #FFFFFF;  /* White background */
+    color: #2F4F4F;             /* Dark Slate Gray text */
+    border: none;               /* Remove border */
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.social-links .tooltip .tooltiptext::after {
+    border-color: #FFFFFF transparent transparent transparent;
+}
+
+/* Specific Tooltip Styling for PROJECT icons 
+   (black bg, white text) */
+.project-links .tooltip .tooltiptext {
+    background-color: #000000;  /* Black background */
+    color: #FFFFFF;             /* White text */
+    border: 1px solid #FFFFFF;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.project-links .tooltip .tooltiptext::after {
+    border-color: #000000 transparent transparent transparent;
+}
+
+/* =========================================
+   Project Links (Icons & Text) in Cards
+   ========================================= */
 .project-links {
     display: flex;
     flex-direction: row;
-    justify-content: center; /* Center the links horizontally */
-    gap: 10px; /* Space between links */
-    margin-top: 15px; /* Space above the links */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    align-items: center; /* Vertically align items */
-}
-
-/* Project Link Styling */
-.project-link {
-    position: relative; /* Necessary for tooltip positioning */
-    display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 10px; /* Adjust padding as needed */
-    color: var(--color-accent);
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Project icon links: black (square/no circle) */
+.project-links .icon-link {
+    color: #FFFFFF !important; /* Force black for project icons */
     text-decoration: none;
-    transition: color var(--transition-duration) ease, transform var(--transition-duration) ease;
+    border-radius: 0 !important; /* Remove circular shape on project icons */
 }
 
-.project-link:hover,
-.project-link:focus {
-    color: var(--color-social-links);
-    transform: scale(1.1);
+.project-links .icon-link:hover {
+    background-color: #000000 !important; 
+    color: #FFFFFF !important;           
+    text-decoration: none;
 }
 
-/* Disabled Icon Styling */
+/* Links within .project-card (text links) should be black */
+.project-card a:not(.icon-link) {
+    color: #FFFFFF !important; /* Black text link */
+}
+.project-card a:not(.icon-link):hover {
+    color: #000000 !important;
+    text-decoration: underline; /* Underline on hover for text links */
+}
+
+/* =========================================
+   Disabled Icon Styling
+   ========================================= */
 .icon-link.disabled {
-    pointer-events: none; /* Prevents clicking */
-    opacity: 0.6; /* Makes it look disabled */
-    cursor: not-allowed; /* Changes cursor on hover */
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
     position: relative;
 }
 
-/* Responsive Design */
+/* =========================================
+   Responsive Design
+   ========================================= */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -415,17 +545,21 @@ a:hover {
         height: auto; /* Allow height to adjust */
     }
 
-    .left-column, .right-column {
+    .left-column,
+    .right-column {
         width: 100%;
     }
 
     .right-column {
         margin-top: 40px;
     }
+
+    .logo {
+        max-width: 500px; /* Slightly smaller on tablets */
+    }
 }
 
 @media (max-width: 768px) {
-
     /* Reduce padding on the main container */
     .main-container {
         padding: 10px; /* Reduced from 20px */
@@ -438,10 +572,10 @@ a:hover {
 
     /* Reduce top margin on the right column */
     .right-column {
-        margin-top: 0px; /* Reduced from 40px */
-        padding-left: 15px; /* Optional: Adjust padding if necessary */
-        padding-right: 15px; /* Optional: Adjust padding if necessary */
-        padding-bottom: 15px; /* Optional: Adjust padding if necessary */
+        margin-top: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
     }
 
     .profile-pic {
@@ -455,7 +589,7 @@ a:hover {
     }
 
     .user-name {
-        font-size: 1.7rem; /* Adjust font size for mobile phones */
+        font-size: 1.7rem;
     }
 
     .right-column h2 {
@@ -474,46 +608,48 @@ a:hover {
     }
 
     .icon-link {
-        width: 50px; /* Further reduced size for very small screens */
+        width: 50px;
         height: 50px;
     }
 
     .icon-link i,
     .icon-link .nostr-logo {
-        font-size: 1.75rem;                     /* Adjust icon size as needed */
-        width: 32px;                            /* Fixed width for images */
-        height: 32px;                           /* Fixed height for images */
+        font-size: 1.75rem;
+        width: 32px;
+        height: 32px;
     }
 
     .qr-code {
-        width: 100%; /* Full width on very small screens */
+        width: 100%;
     }
 
-    /* Responsive Adjustments for Coming Soon Badge */
     .coming-soon-badge {
-        top: 8px; /* Slightly closer to the top */
-        left: -8px; /* Slightly closer to the left */
-        padding: 10px 24px; /* Maintain wider padding */
-        font-size: 1rem; /* Slightly smaller font */
+        top: 8px;
+        left: -8px;
+        padding: 10px 24px;
+        font-size: 1rem;
         border-radius: 10px;
-        transform: rotate(-15deg); /* Reduced tilt for better fit */
-        max-width: 200px; /* Adjusted max-width */
+        transform: rotate(-15deg);
+        max-width: 200px;
+    }
+
+    .logo {
+        max-width: 400px; /* Smaller on small tablets and large phones */
     }
 }
 
 @media (max-width: 480px) {
-
     /* Reduce padding on the main container */
     .main-container {
-        padding: 10px; /* Reduced from 20px */
+        padding: 10px;
     }
 
     /* Reduce top margin on the right column */
     .right-column {
-        margin-top: 0px; /* Reduced from 40px */
-        padding-left: 15px; /* Optional: Adjust padding if necessary */
-        padding-right: 15px; /* Optional: Adjust padding if necessary */
-        padding-bottom: 15px; /* Optional: Adjust padding if necessary */
+        margin-top: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
     }
 
     .profile-pic {
@@ -527,7 +663,7 @@ a:hover {
     }
 
     .user-name {
-        font-size: 1.7rem; /* Adjust font size for mobile phones */
+        font-size: 1.7rem;
     }
 
     .right-column h2 {
@@ -546,40 +682,43 @@ a:hover {
     }
 
     .image-container {
-        height: 150px; /* Fixed height for consistency */
+        height: 150px;
     }
 
     .image-container img {
         width: 95%;
         height: 95%;
-        object-fit: contain; /* Ensures images scale uniformly */
+        object-fit: contain;
         transition: transform var(--transition-duration) ease;
     }
 
     .icon-link {
-        width: 50px; /* Further reduced size for very small screens */
+        width: 50px;
         height: 50px;
     }
 
     .icon-link i,
     .icon-link .nostr-logo {
-        font-size: 1.75rem;                     /* Adjust icon size as needed */
-        width: 32px;                            /* Fixed width for images */
-        height: 32px;                           /* Fixed height for images */
+        font-size: 1.75rem;
+        width: 32px;
+        height: 32px;
     }
 
     .qr-code {
-        width: 100%; /* Full width on very small screens */
+        width: 100%;
     }
 
-    /* Responsive Adjustments for Coming Soon Badge */
     .coming-soon-badge {
-        top: 8px; /* Slightly closer to the top */
-        left: -12px; /* Slightly closer to the left */
-        padding: 10px 24px; /* Maintain wider padding */
-        font-size: 1rem; /* Slightly smaller font */
+        top: 8px;
+        left: -12px;
+        padding: 10px 24px;
+        font-size: 1rem;
         border-radius: 10px;
-        transform: rotate(-15deg); /* Reduced tilt for better fit */
-        max-width: 200px; /* Adjusted max-width */
+        transform: rotate(-15deg);
+        max-width: 200px;
+    }
+
+    .logo {
+        max-width: 300px; /* Smaller on phones */
     }
 }
